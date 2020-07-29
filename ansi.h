@@ -1,7 +1,17 @@
+// Ansi.h
+// Single header helper for ansi console output
+// http://github.com/fladderkatten/ansi
+//
+
 #pragma once
 
-struct Ansi {
-  
+class Ansi
+{
+  struct Toggle {
+    const char* on;
+    const char* off;
+  };
+public:
   // foreground
   struct {
     const char* const black   = "\033[30m";
@@ -13,7 +23,7 @@ struct Ansi {
     const char* const cyan    = "\033[36m";
     const char* const white   = "\033[38m";
     const char* const reset   = "\033[39m";
-  } fg;
+  } const fg;
 
   // background
   struct {
@@ -26,32 +36,13 @@ struct Ansi {
     const char* const cyan    = "\033[46m";
     const char* const white   = "\033[47m";
     const char* const reset   = "\033[49m";
-  } bg;
+  } const bg;
 
-  struct {
-    const char* const on =  "\033[1m";
-    const char* const off = "\033[22m";
-  } bold;
-
-  struct {
-    const char* const on  = "\033[3m";
-    const char* const off = "\033[23m";
-  } italics;
-
-  struct {
-    const char* const on  = "\033[4m";
-    const char* const off = "\033[24m";
-  } underline;
-
-  struct {
-    const char* const on  = "\033[7m";
-    const char* const off = "\033[27m";
-  } inverse;
-
-  struct {
-    const char* const on  = "\033[9m";
-    const char* const off = "\033[29m";
-  } strikethrough;
-
+  Toggle bold          = { "\033[1m", "\033[22m" };
+  Toggle underline     = { "\033[4m", "\033[24m" };
+  Toggle italics       = { "\033[3m", "\033[23m" };
+  Toggle inverse       = { "\033[7m", "\033[27m" };
+  Toggle strikethrough = { "\033[9m", "\033[29m" };
+  
   const char* const reset = "\033[0m";
-} ansi;
+} constexpr ansi;
